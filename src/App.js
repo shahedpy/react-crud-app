@@ -9,6 +9,18 @@ function App() {
     setEmployeeList(Employees);
   }, []);
 
+  const handleEdit = (id) => {
+    alert(`Edit employee with ID: ${id}`);
+  };
+
+  const handleDelete = (id) => {
+    if (!window.confirm('Are you sure you want to delete this employee?')) {
+      return;
+    }
+    const updatedList = employeeList.filter(employee => employee.id !== id);
+    setEmployeeList(updatedList);
+  };
+
   return (
     <div className="App">
       <div className="container mt-4">
@@ -34,8 +46,8 @@ function App() {
                   <td>{employee.name}</td>
                   <td>{employee.position}</td>
                   <td>
-                    <button className="btn btn-primary btn-sm me-2">Edit</button>
-                    <button className="btn btn-danger btn-sm">Delete</button>
+                    <button className="btn btn-primary btn-sm me-2" onClick={ (e) => handleEdit(employee.id) }>Edit</button>
+                    <button className="btn btn-danger btn-sm" onClick={ (e) => handleDelete(employee.id) }>Delete</button>
                   </td>
                 </tr>
               ))}
