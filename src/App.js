@@ -70,8 +70,8 @@ function App() {
               {employeeList.map((employee, index) => (
                 <tr key={employee.id}>
                   <td>{index + 1}</td>
-                  <td>{employee.name}</td>
-                  <td>{employee.position}</td>
+                  <td className="text-start">{employee.name}</td>
+                  <td className="text-start">{employee.position}</td>
                   <td>
                     <button className="btn btn-primary btn-sm me-2" onClick={() => openEditModal(employee)}>Edit</button>
                     <button className="btn btn-danger btn-sm" onClick={() => handleDelete(employee.id)}>Delete</button>
@@ -83,7 +83,6 @@ function App() {
         </div>
       </div>
 
-      {/* Bootstrap Modal */}
       {showModal && (
         <div className="modal show d-block" tabIndex="-1">
           <div className="modal-dialog">
@@ -93,7 +92,7 @@ function App() {
                 <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
               </div>
               <div className="modal-body">
-                <div className="mb-3">
+                <div className="mb-3 text-start">
                   <label className="form-label">Name</label>
                   <input
                     type="text"
@@ -102,7 +101,7 @@ function App() {
                     onChange={(e) => setCurrentEmployee({ ...currentEmployee, name: e.target.value })}
                   />
                 </div>
-                <div className="mb-3">
+                <div className="mb-3 text-start">
                   <label className="form-label">Position</label>
                   <input
                     type="text"
