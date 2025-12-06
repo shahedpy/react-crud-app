@@ -9,8 +9,34 @@ function App() {
     setEmployeeList(Employees);
   }, []);
 
+  const handleAdd = () => {
+    const name = prompt("Enter employee name:");
+    const position = prompt("Enter employee position:");
+    if (!name || !position) return;
+
+    const newEmployee = {
+      id: Date.now(), // unique ID
+      name,
+      position
+    };
+
+    setEmployeeList([...employeeList, newEmployee]);
+  };
+
   const handleEdit = (id) => {
-    alert(`Edit employee with ID: ${id}`);
+    const employeeToEdit = employeeList.find(emp => emp.id === id);
+    if (!employeeToEdit) return;
+
+    const newName = prompt("Enter new name:", employeeToEdit.name);
+    const newPosition = prompt("Enter new position:", employeeToEdit.position);
+
+    if (!newName || !newPosition) return;
+
+    const updatedList = employeeList.map(emp =>
+      emp.id === id ? { ...emp, name: newName, position: newPosition } : emp
+    );
+
+    setEmployeeList(updatedList);
   };
 
   const handleDelete = (id) => {
@@ -25,10 +51,9 @@ function App() {
     <div className="App">
       <div className="container mt-4">
         <div className="card">
-          <div className="card-header">
-            <div className="card-title">
-              <h2>Employee List</h2>
-            </div>
+          <div className="card-header d-flex justify-content-between align-items-center">
+            <h2>Employee List</h2>
+            <button className="btn btn-success" onClick={handleAdd}>Add Employee</button>
           </div>
           <table className="table table-striped">
             <thead>
